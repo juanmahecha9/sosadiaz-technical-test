@@ -1,0 +1,97 @@
+<app-header title=""></app-header>
+<ion-content [fullscreen]="true">
+  <form class="mx-3 my-3" [formGroup]="formGroup" (submit)="found()">
+    <ion-item>
+      <ion-input
+        formControlName="user"
+        placeholder="Ingrese el nombre de usaurio a buscar"
+      ></ion-input>
+    </ion-item>
+    <div class="flex justify-center items-center mt-2">
+      <button
+        type="submit"
+        class="text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+      >
+        Buscar usuario
+      </button>
+    </div>
+  </form>
+
+  <div class="mx-3 m-y-3 flex flex-col justify-center items-center">
+    @for(data of data_to_show[page-1]; track $index){
+    <div
+      class="my-3 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+    >
+      <a>
+        <div class="flex flex-col items-center">
+          <img
+            class="rounded-t-lg"
+            [src]="data.avatar_url"
+            alt="Profile image of {{data.login}}"
+            style="width: 150px;"
+          />
+        </div>
+      </a>
+      <div class="p-5">
+        <a>
+          <h5
+            class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+          >
+            {{data.login}}
+          </h5>
+        </a>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          <a style="cursor: pointer;" [href]="data.html_url" target="_blank"
+            >GitHub</a
+          >
+        </p>
+      </div>
+    </div>
+
+    }@empty {
+    <div class="h-95 flex items-center justify-center">
+      @if(is_api_error){
+      <h1 class="text-center" style="color: red;">
+        {{default_message}}
+      </h1>
+      }@else {
+      <h1 class="text-center">
+        {{default_message}}
+      </h1>
+      }
+    </div>
+    }
+  </div>
+
+  @if(is_new_request){
+  <div class="flex flex-col items-center">
+    <!-- Help text -->
+    <span class="text-sm text-gray-700 dark:text-gray-400">
+      Showing
+      <span class="font-semibold text-gray-900 dark:text-white"
+        >Page {{page}}</span
+      >
+      of
+      <span class="font-semibold text-gray-900 dark:text-white"
+        >{{data_to_show.length}}</span
+      >
+      Entries
+    </span>
+    <!-- Buttons -->
+    <div class="inline-flex mt-2 xs:mt-0">
+      <button
+        (click)="previousPage()"
+        class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      >
+        Prev
+      </button>
+      <button
+        (click)="nextPage()"
+        class="flex items-center justify-center px-3 h-8 text-sm font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+  }
+</ion-content>

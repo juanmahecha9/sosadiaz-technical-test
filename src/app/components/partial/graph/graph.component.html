@@ -1,0 +1,50 @@
+<div class="my-3 w-full">
+  <div class="ml-4">
+    <p class="font-bold">
+      Select Period to show your progress
+    </p>
+  </div>
+  <div class="grid-container mt-4">
+    @for(btn of btnList; track $index){
+    <div class="grid-item">
+      @if(btn!== 'Choose date'){
+      <button
+        [ngClass]="{'active': selectedButton === $index, 'normal': selectedButton !== $index}"
+        (click)="activeButton($index)"
+      >
+        <p class="button-text" style="font-size: 12px !important;">{{ btn }}</p>
+      </button>
+      }@else {
+      <button
+        [ngClass]="{'active': selectedButton === $index, 'normal': selectedButton !== $index}"
+      >
+        <app-icon icon="calendar-month"></app-icon>
+        <p class="button-text" style="font-size: 12px !important;">{{ btn }}</p>
+      </button>
+      }
+    </div>
+    }
+  </div>
+  <div class="mt-7">
+    <div class="ml-4">
+      <p class="font-bold">
+        Lorem ipsum Chart
+      </p>
+      <div>
+        <app-bar></app-bar>
+      </div>
+    </div>
+  </div>
+  <div class="mt-7">
+    <div class="ml-4">
+      <p class="font-bold">
+        Lorem ipsum Chart
+      </p>
+      <div
+        class="w-full md:w-auto border border-gray-200 rounded-lg shadow dark:border-gray-700 dark:bg-gray-800 bg-gray-300"
+      >
+        <app-donut></app-donut>
+      </div>
+    </div>
+  </div>
+</div>

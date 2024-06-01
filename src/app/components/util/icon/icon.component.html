@@ -1,0 +1,19 @@
+<div class="div" [style]="style">
+  @if(theme == 'light'){
+  <img
+    [src]="icon_path"
+    alt="{{icon}} icon"
+    style="filter: invert(1) brightness(2);"
+    [style]="img_width"
+  />
+  }@else if (theme == 'dark') {
+  <img [src]="icon_path" alt="{{icon}} icon" [style]="img_width" />
+  }@else {
+  <img
+    [style]="img_width"
+    [src]="icon_path"
+    alt="{{icon}} icon"
+    [ngStyle]="{'filter': isDarkTheme ? 'invert(1) brightness(2)' : 'none'}"
+  />
+  }
+</div>
